@@ -18,7 +18,6 @@ module.exports = {
             'react-helmet',
             'mobx',
             'mobx-react',
-            'classnames',
         ]
     },
     devtool: 'cheap-module-source-map',

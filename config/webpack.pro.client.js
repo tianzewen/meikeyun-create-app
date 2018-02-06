@@ -10,7 +10,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 module.exports = {
     entry: {
         app: path.join(config.CLIENT_ROOT, 'client_index.js'),
-        vendor: ['react', 'react-dom', 'react-router-dom', 'react-helmet', 'mobx', 'mobx-react', 'classnames']
+        vendor: ['react', 'react-dom', 'react-router-dom', 'react-helmet', 'mobx', 'mobx-react']
     },
     output: {
         path: config.WEBPACK_CLIENT_ROOT,
