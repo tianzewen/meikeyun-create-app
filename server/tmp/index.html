@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html {{ htmlAttributes }}>
+    <head>
+        {{ title | safe }}
+        {{ meta | safe }}
+        {{ link | safe }}
+        <script id='server_data'>
+            window.redis = {% if stores %}{{ stores | safe }}{% else %}null{% endif %};
+            var server_data_dom = document.getElementById('server_data');
+            server_data_dom.parentNode.removeChild(server_data_dom);
+        </script>
+        <style>
+            * { 
+                margin: 0px;padding: 0px;
+                outline: none;
+                color: inherit;font-size: inherit;
+                -webkit-tap-highlight-color: transparent;
+            }
+            html, body {
+                height: 100%;width: 100%;
+                font-family: '兰亭','微软雅黑','Microsoft YaHei';font-size: 12px;
+                overflow: hidden;
+                background-color: #fff;
+            }
+            ul,li { list-style: none; }
+            a { text-decoration: none; }
+            .icon {
+                width: 1em; height: 1em;
+                vertical-align: -0.15em;
+                fill: currentColor;
+                overflow: hidden;
+            }
+            @media all and (min-width: 375px) {
+                html, body {
+                    font-size: 13px;
+                }
+            }
+            @media all and (min-width: 414px) {
+                html, body {
+                    font-size: 14px;
+                }
+            }
+            @media all and (min-width: 453px) {
+                html, body {
+                    font-size: 15px;
+                }
+            }
+            @media all and (min-width: 492px) {
+                html, body {
+                    font-size: 16px;
+                }
+            }
+            @media all and (min-width: 531px) {
+                html, body {
+                    font-size: 17px;
+                }
+            }
+            @media all and (min-width: 570px) {
+                html, body {
+                    font-size: 18px;
+                }
+            }
+        </style>
+        <link rel='stylesheet' type='text/css' href="/{{ manifest['app.css'] }}"/>
+    </head>
+    <body {{ bodyAttributes }}>
+        <div id='wrap' style='height:100%'>
+            {{ body | safe }}
+        </div>
+        <script src="/{{ manifest['manifest.js'] }}"></script>
+        <script src="/{{ manifest['vendor.js'] }}"></script>
+        <script src="/{{ manifest['app.js'] }}"></script>
+    </body>
+</html>
