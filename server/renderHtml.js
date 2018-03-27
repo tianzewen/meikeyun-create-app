@@ -7,19 +7,19 @@ const path = require('path')
 // 模板引擎
 const Env = require('./middleware/nunjucksEnv')
 
-module.exports = async (url) => {
+module.exports = async (url, debug = false) => {
     let stores = null, body = null, context = {}
     // 渲染body内容
     if (config.SSR) {
         // 引入翻译
         require('babel-register')(JSON.parse(fs.readFileSync('./.babelrc')))
-        let result = require('./middleware/appBody')(url)
+        let result = require('./middleware/appBody')(url, debug)
         stores = result.stores
         body = result.body
     }
 
     let manifest = {}
-    if (config.DEBUG) {
+    if (debug) {
         manifest = {
             'manifest.js': 'manifest.js',
             'vendor.js': 'vendor.js',

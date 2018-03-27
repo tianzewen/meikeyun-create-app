@@ -19,13 +19,19 @@ const Koa = require('koa')
 const app = new Koa()
 
 const webpack = require('webpack')
+const {devMiddleware, hotMiddleware}  = require('koa-webpack-middleware')
 
 // 打包前端代码
-const webpack_client_config = require(`${config.CONFIG_ROOT}/webpack.pro.client.js`)
+const webpack_client_config = require(`${config.CONFIG_ROOT}/webpack.dev.client.js`)
 const client_compiler = webpack(webpack_client_config)
 
 
-client_compiler.run((err, stats) => {console.log('客户端代码打包完毕！')})
+// 热部署
+app.use(devMiddleware(client_compiler, {
+    noInfo: true,
+    publicPath: '/'
+}))
+app.use(hotMiddleware(client_compiler))
 
 // 静态资源服务器
 app.use(require('koa-static')(config.WEBPACK_CLIENT_ROOT))
@@ -68,14 +74,14 @@ if (config.SSR) {
 
         ctx.response.type = 'html'
         // 返回页面
-        renderHtml(ctx.request.url)
+        renderHtml(ctx.request.url, true)
             .then(res => {
                 ctx.response.body = res
             })
     }
 } else {
     const renderHtml = require('./renderHtml')
-    renderHtml()
+    renderHtml('', true)
         .then(res => {
             // 在config.WEBPACK_CLIENT_ROOT里生成index.html
             if(!fs.existsSync(config.WEBPACK_CLIENT_ROOT)) {

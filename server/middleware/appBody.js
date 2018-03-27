@@ -6,9 +6,9 @@ import ReactDom from 'react-dom/server'
 import { StaticRouter } from 'react-router-dom'
 import App from '../../client/router'
 
-module.exports = (url) => {
+module.exports = (url, debug = false) => {
     let context = {}
-    const render = config.DEBUG ? ReactDom.renderToStaticNodeStream : ReactDom.renderToNodeStream
+    const render = debug ? ReactDom.renderToStaticNodeStream : ReactDom.renderToNodeStream
     const body_stream = render(
         <StaticRouter context={context} location={url}>
             <App stores={stores} />
