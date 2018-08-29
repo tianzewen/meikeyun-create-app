@@ -67,7 +67,7 @@ if (config.SSR) {
         require('asset-require-hook')({
             extensions: ['jpg', 'png', 'gif', 'webp'],
             limit: 8192,
-            generateScopedName: 'images/[hash:8].[name].[ext]'
+            name: 'images/[hash:8].[name].[ext]'
         })
 
         const renderHtml = require('./renderHtml')

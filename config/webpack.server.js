@@ -37,7 +37,7 @@ module.exports = {
                 loader: 'babel-loader',
                 query: {
                     babelrc: 'false',
-                    presets: ['es2015', 'react', 'stage-0'],
+                    presets: ['env', 'react', 'stage-0'],
                     plugins: ['transform-decorators-legacy']
                 }
             },

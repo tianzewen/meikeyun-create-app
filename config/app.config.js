@@ -9,6 +9,8 @@ const app_root = path.join(__dirname, '../')
 module.exports = {
     // 项目根目录
     APP_ROOT: app_root,
+    // 为React App生成的html名称 直接访问该文件时 SSR失效
+    HTML_NAME: 'mky_index.html',
     // 项目配置文件夹
     CONFIG_ROOT: path.join(app_root, 'config'),
     // 前端入口文件
